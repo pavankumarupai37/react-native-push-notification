@@ -182,6 +182,8 @@ public class RNPushNotificationHelper {
         } else {
             getAlarmManager().set(AlarmManager.RTC_WAKEUP, fireDate, pendingIntent);
         }
+        // manual patch to use inexact alarm timing for scheduled notifications (avoids needing SCHEDULE_EXACT_ALARM permission)
++        getAlarmManager().setWindow(AlarmManager.RTC_WAKEUP, fireDate, 10 * 60 * 1000, pendingIntent);
     }
 
 
